@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // // 赋值和浅拷贝
+    // var obj = {name:'佩奇',type:'猪',family:{bother:'乔治',father:'猪爸爸'}}
+    // var obj1 = obj
+    // var obj2 = {...obj} //浅拷贝只会复制一份对象中的基本类型，如果存在引用类型，也只是复制其引用地址
+    // obj1.name = '乔治'
+    // obj2.type = '狗'
+    // obj1.family.bother = '苏西'
+    // obj2.family.father = '猪妈妈'
+    // console.log(obj)
+    // console.log(obj1)
+    // console.log(obj2)
+
+    // //简易处理深拷贝 利用JSON.stringify 将js对象序列化（JSON字符串），再使用JSON.parse来反序列化(还原)js对象
+    // //局限性较大 拷贝的对象中出现正则、函数、undefined等值 就会出错
+    // var obj = { name: "杨", sex: "男" };
+    // function deepClone() {
+    //   return JSON.parse(JSON.stringify(obj));
+    // }
+    // obj1 = deepClone();
+    // obj1.name = "yang";
+    // console.log(obj.name); //杨
+    // console.log(obj1.name); //yang
+
+    // 使用递归实现深拷贝
+    // 思路 对于简单类型直接复制，对于引用类型，递归复制他的每一个属性
+    // 定义检测数据类型的功能函数
+    function test(data) {
+      return Object.prototype.toString.call(data).slice(8,-1)
+    }
+    function deepCopy(obj) {
+      //1、检测数据的类型
+      let dataType = test(obj);
+      //2、初始化一个接收数据的值
+      let resulter;
+      if (dataType === "Object") {
+        resulter = {};
+      } else if (dataType === "Array") {
+        resulter = [];
+      } else {
+        return obj;
+      }
+      //  3、对数据进行遍历
+      for(let key in obj){
+        //   3.1获取对象中值进行检测类型
+        let value = obj[key]
+        let dataType2 = test(value)
+        if(dataType2 === "Object" || dataType === "Array"){
+            resulter[key] = deepCopy(value)
+        }else{
+            resulter[key] = value
+        }
+      }
+      return resulter
+    }
+    var obj = {name:'佩奇',type:'猪',family:{bother:'乔治',father:'猪爸爸'}}
+    var obj1 = deepCopy(obj)
+    obj1.name = '乔治'
+    obj1.family.bother = '恐龙'
+    console.log(obj) 
+    console.log(obj1)
+  </script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 深拷贝的思路，对于简单类型直接复制 引用类型递归复制每一项属性
+     test=(data)=>{
+        return Object.prototype.toString.call(data).slice(8,-1)
+    }
+   deepCope=(data)=>{
+    var dataType = test(data)
+    var result
+    if(dataType === 'Object'){
+        result = {}
+    }else if(dataType === 'Array'){
+        result = []
+    }
+    for(let key in data){
+        let val = data[key] //佩奇 猪 {}
+        let dataType2 = test(val)
+        if(dataType2 === 'Object' || dataType2 === 'Array'){
+            result[key] = deepCope(val) // {family:{}}
+        }else{
+            result[key] = val //{name:'佩奇',type:'猪'}
+        }
+    }
+    return result
+   }
+   var obj = {name:'佩奇',type:'猪',family:{bother:'乔治',father:'猪爸爸'}}
+   var obj1 = deepCope(obj)
+   obj1.family.bother = "猪八戒"
+   console.log(obj)
+   console.log(obj1)
+</script>
+</html>

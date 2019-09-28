@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+//     // 关于bind
+//    var obj = {
+//        name1:'yang',
+//        fn:function(a,b,c){   
+//             console.log(a,b,c)
+//            return this.name1
+//        }
+//    }
+//    var obj1 = {name1:'杨标泓'}
+//    var fn1 = obj.fn //function(){return this.name1}
+//    console.log(fn1()) //undefind window上并没有name1这个属性
+
+//    var fn2 = fn1.call(obj1,11,22,33) //将函数的this指定为obj1,刚好obj1有name1这个属性
+//    console.log(fn2) //'yang'
+
+// // 关于apply
+// function Person(name,age){
+//     this.name = name
+//     this.age = age
+// }
+// function Student(name,age,gender){
+//     Person.apply(this,arguments)
+//     this.gender = gender
+// } 
+// //现在只是一个普通的函数 this指向的是window
+// // arguments 参数数组['杨标泓',23,'男']
+// var yang = new Student('杨标泓',23,'男')
+// //通过new操作符来生成一个实例对象 this指向该实例 function Person(){yang.name = name,...} 
+// console.log(yang)
+
+// // 关于call
+// function Person(name,age){
+//     this.name = name
+//     this.age = age
+// }
+// function Student(name,age,gender){
+//     Person.call(this,name,age)
+//     this.gender = gender
+// } 
+// //现在只是一个普通的函数 this指向的是window
+// // arguments 参数数组['杨标泓',23,'男']
+// var yang = new Student('杨标泓',23,'男')
+// //通过new操作符来生成一个实例对象 this指向该实例 function Person(){yang.name = name,...} 
+// console.log(yang)
+
+// 关于apply的应用拓展
+var a = [2,1,4,6,2,6,74,3]
+// var b = ['a','b','c','d']
+var max = Math.max.apply({},a)
+console.log(max)
+
+  </script>
+</html>
