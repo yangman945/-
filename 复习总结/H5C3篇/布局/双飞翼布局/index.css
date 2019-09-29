@@ -1,0 +1,41 @@
+@import "reset.css";
+.clearfloat:after {
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0;
+}
+header,
+footer {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  background-color: #ccc;
+}
+.container {
+  width: 100%;
+}
+.container .left,
+.container .main,
+.container .right {
+  height: 50px;
+  float: left;
+}
+.container .left {
+  width: 200px;
+  background-color: red;
+  margin-left: -100%;
+}
+.container .main {
+  width: 100%;
+}
+.container .main .middle {
+  margin: 0 300px 0 200px;
+}
+.container .right {
+  width: 300px;
+  background-color: blue;
+  margin-left: -300px;
+}
